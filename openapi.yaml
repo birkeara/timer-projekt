@@ -1,0 +1,151 @@
+openapi: 3.0.0
+info:
+  title: Timer Service API
+  description: A simple REST API for managing countdown timers.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+paths:
+  /timers:
+    post:
+      summary: Create a new timer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [duration]
+              properties:
+                duration:
+                  type: number
+                  example: 90
+      responses:
+        '201':
+          description: Timer created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+        '400':
+          description: Invalid duration
+
+  /timers/{id}/start:
+    post:
+      summary: Start a paused timer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Timer started
+        '400':
+          description: Timer is already running
+        '404':
+          description: Timer not found
+
+  /timers/{id}/pause:
+    post:
+      summary: Pause a running timer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Timer paused
+        '400':
+          description: Timer is not running
+        '404':
+          description: Timer not found
+
+  /timers/{id}/reset:
+    post:
+      summary: Reset a timer to its original duration
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Timer reset
+        '404':
+          description: Timer not found
+
+  /timers/{id}/adjust:
+    post:
+      summary: Adjust the duration of a paused timer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [duration]
+              properties:
+                duration:
+                  type: number
+                  example: 120
+      responses:
+        '200':
+          description: Timer adjusted
+        '400':
+          description: Timer is running or invalid duration
+        '404':
+          description: Timer not found
+
+  /timers/{id}/status:
+    get:
+      summary: Get the current status of a timer
+      description: >
+        Returns the current state of the timer, including remaining seconds.
+        If the timer is running, remaining is dynamically computed based on the endsAt timestamp.
+        If paused, remaining is fixed and endsAt is null.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Timer status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  duration:
+                    type: number
+                    description: The original configured duration in seconds
+                  remaining:
+                    type: number
+                    description: Time left in seconds. Dynamic if running, static if paused
+                  running:
+                    type: boolean
+                    description: True if timer is currently running
+                  endsAt:
+                    type: string
+                    format: date-time
+                    nullable: true
+                    description: The timestamp when the timer is expected to finish. Null if paused
+        '404':
+          description: Timer not found

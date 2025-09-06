@@ -33,13 +33,18 @@ Min timerApi fil vil jeg gerne have delt op i forskellige filer. Fx typer, api, 
 
 I forhold til forretningsdelen af opgaven og hvordan user storyen var ville jeg gerne vise en navigation som gav mening ift til det der blev beskrevet. I den virkelige verden ville jeg have benyttet mig af Router og ikke hardcoded links ind i html'en men fordi jeg var ved at løbe tør for tid havde jeg ikke mulighed for at ændre dette.
 
+### Tailwind CSS
+
+Tailwind CSS er nemt at bruge og man kan style hurtigt med de forskellige stylingklasser, derudover har jeg brugt det før og kender det godt. Jeg valgte derfor at bruge Tailwind fordi det ville være tidsbesvarende at bruge et stylingsystem jeg kendte til. 
+
+
 ### Dirigent/viewer
 
 Min tanke bag disse to sider var, at jeg ville lave forskellige visninger som i sidste ende kunne vises til to forskellige typer brugere (som beskrevet i opgaven). Jeg ville bruge de komponenter jeg lavede til at sætte siderne op med og genbruge komponenter hvor det var muligt.
 
 ### Næste skridt
 
-Åbenlyst er der en del der mangler, men ud over det åbenlyse i de funktioner som er beskrevet i opgaven som ikke er med, ville jeg simplificere min kode yderligere, fjerne hardcodede elementer, erstatte gentagende kode med genbrugelige komponenter.
+Åbenlyst er der en del der mangler, men ud over det åbenlyse i de funktioner som er beskrevet i opgaven som ikke er med, ville jeg simplificere min kode yderligere, fjerne hardcodede elementer, erstatte gentagende kode med genbrugelige komponenter. Sidst men ikke mindst ville det også være en god idé at benytte sig af fx automatiske tests som Cypress eller lignende.
 
 ### Hvad jeg ville have gjort hvis jeg sku gøre det hele igen...
 
